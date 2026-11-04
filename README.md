@@ -29,11 +29,11 @@ Reciprocal Rank Fusion (Cormack, Clarke, and Buettcher, SIGIR 2009) merges ranke
 ```mermaid
 flowchart LR
   UI["React search bench"] --> API["Node API"]
-  API --> EMB["Local bge-small-en-v1.5<br/>or OpenAI, if a key is set"]
+  API --> EMB["Local bge-small or optional OpenAI"]
   API --> RPC["search_catalogue"]
   RPC --> FTS["tsvector keyword"]
   RPC --> VEC["pgvector cosine"]
-  FTS --> RRF["Reciprocal Rank Fusion, k = 60"]
+  FTS --> RRF["Reciprocal Rank Fusion k equals 60"]
   VEC --> RRF
   RRF --> UI
 ```
@@ -114,6 +114,8 @@ Hybrid leads both averages. On the paraphrase and the identifier queries it keep
 The same feet query on a phone. Columns stack, with jumps for Keyword, Semantic, and Hybrid.
 
 ![Mobile layout of the feet query](docs/screenshots/feet-warm-mobile.png)
+
+A short walkthrough of those three queries, then the phone layout, is in [docs/crossrank-comparison.mp4](docs/crossrank-comparison.mp4). GitHub will play that file from the repo.
 
 ## Tests
 
