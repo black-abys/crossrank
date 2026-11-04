@@ -1,0 +1,24 @@
+# Local Postgres with pgvector. No account and no API key.
+# The seed script applies supabase/migrations on top of this database.
+
+services:
+  db:
+    image: pgvector/pgvector:pg16
+    container_name: crossrank-db
+    environment:
+      POSTGRES_USER: crossrank
+      POSTGRES_PASSWORD: crossrank
+      POSTGRES_DB: crossrank
+    ports:
+      - "5433:5432"
+    volumes:
+      - crossrank_data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U crossrank -d crossrank"]
+      interval: 3s
+      timeout: 5s
+      retries: 20
+    restart: unless-stopped
+
+volumes:
+  crossrank_data:

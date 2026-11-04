@@ -1,0 +1,22 @@
+{
+  "name": "crossrank",
+  "private": true,
+  "version": "1.0.0",
+  "description": "Hybrid product search bench: keyword, semantic, and Reciprocal Rank Fusion.",
+  "workspaces": ["server", "client"],
+  "scripts": {
+    "db:up": "docker compose up -d",
+    "db:down": "docker compose down",
+    "dev": "concurrently -n api,web -c cyan,green \"npm run dev -w server\" \"npm run dev -w client\"",
+    "seed": "npm run seed -w server",
+    "eval": "npm run eval -w server",
+    "test": "npm run test -w server",
+    "typecheck": "npm run typecheck -w server && npm run build -w client"
+  },
+  "devDependencies": {
+    "concurrently": "^9.2.1"
+  },
+  "engines": {
+    "node": ">=20"
+  }
+}
